@@ -1,0 +1,670 @@
+/* 
+    Author: Noha Hamed  
+    Date: 24-5-2022
+*/
+
+/* ScrollBar Styles */
+::-webkit-scrollbar {
+    background-color: var(--scroll-bg);
+    border-radius: 10px;
+    width: 10px;
+    height: 10px;    
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--yellow);
+    border-radius: 10px;
+}
+
+/* CSS Variables */
+
+/* Dark Mode */
+:root {
+    --white: #fff;
+    --white-txt-color: #f1f1f1;
+
+    --scroll-bg: #1a1818;
+    --bg-color: #0e0d0d;
+    --txt-color: #f1f1f1;
+    --back-to-top-bg: #e0ddddb4;
+    --back-to-top-clr: #131313;
+    --menu-list-bg: #1a1818;
+    --menu-list-shadow: #000;
+    --menu-item-shadow: #000000;
+    --menu-cat-con-bg: #1a1818ee;
+    --menu-cat-con-shadow: #000000;
+    
+    --nav-bg: #0f0f0f;
+    --nav-shadow: #000000;
+    --yellow: #ffd441;
+    --divider: #fff;
+    --divider-width: 2px;
+
+    --font: sans-serif;
+}
+
+/* Light Mode */
+@media (prefers-color-scheme: light) {
+    :root {
+        --scroll-bg: #fff;
+        --bg-color: #fff;
+        --txt-color: #000;
+        --back-to-top-bg: #555555ce;
+        --back-to-top-clr: #ffffff;
+        --menu-list-bg: #fff;
+        --menu-list-shadow: #d8d8d8fb;
+        --menu-item-shadow: #b4b4b4;
+        --menu-cat-con-bg: #f8f8f8ec;
+        --menu-cat-con-shadow: #d8d8d8fb;
+        
+        --nav-bg: #f0f0f0;
+        /* --nav-shadow: #c2c2c2fb; */
+        --divider: #808080;
+        --divider-width: 1px;
+
+        --font: 'Poppins', sans-serif;
+    }
+}
+
+/* General Styles */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image: url(../images/food.png);
+    font-family: var(--font);
+}
+
+img {
+    max-width: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.container {
+    width: 80%;
+    max-width: 1170px;
+    margin: 0 auto;
+}
+
+.row {
+    display: flex;
+}
+
+.row-center-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row-space_bw-center {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Scroll To Top Styles */
+#myBtn {
+    background-color: var(--back-to-top-bg);
+    border-radius: 100%;
+    border: none;
+    outline: none;
+    display: none;
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 99;
+    padding: 1rem;
+    cursor: pointer;
+    opacity: .7;
+}
+
+#myBtn:hover {
+    opacity: 1;
+}
+
+#Capa_1 {
+    width: 1.3rem;
+    fill: var(--back-to-top-clr);
+}
+
+/* Header & Navbar Styles */
+.header {
+    position: absolute;
+    width: 100%;
+}
+
+.navbar {
+    padding: .7rem 0;
+}
+
+.logo-img{
+    width: 4rem;
+    margin-right: 1rem;
+}
+
+.logo-text {
+    font-family: 'Nunito', sans-serif;
+    font-size: 2rem;
+    line-height: 1;
+    text-transform: capitalize;
+    color: var(--white-txt-color);
+}
+
+.nav-list {
+    gap: 2rem;
+    font-size: 1.07rem;
+}
+
+.nav-item {
+    position: relative;
+    padding: 1rem .4rem .5rem;
+    overflow: hidden;
+}
+
+.nav-link {
+    color: var(--white);
+    font-weight: 300;
+    cursor: pointer;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: translate(-7rem);
+    transition: transform .5s;
+}
+
+.nav-item:hover .nav-link::before {
+    border-bottom: 2px solid var(--yellow);
+    transform: translate(0rem);
+}
+
+/* Mobile Navigation */
+#nav-bar {
+    display: none;
+}
+
+@media (max-width: 800px) {
+
+    .logo-img {
+        width: 3rem;
+        margin-right: .5rem;
+    }
+
+    .logo-text {
+        font-size: 1.5rem;
+    }
+
+    .nav-list {
+        background-color: var(--nav-bg);
+        border-radius: 15px;
+        box-shadow: 2px -2px 10px var(--nav-shadow);
+        flex-direction: column;
+        position: absolute;
+        top: -700%;
+        right: 0;
+        z-index: 2;
+        padding: 8rem 5rem 5rem;
+        transition: top .5s;
+    }
+
+    #nav-bar:checked ~ .nav-list .nav-link {
+        color: var(--txt-color);
+    }
+
+    #nav-bar:checked ~ .nav-list {
+        top: -2%;
+    }
+
+    .bar-label {
+        position: relative;
+        z-index: 3;
+        width: 1.5rem;
+        height: 1.8rem;
+        cursor: pointer;
+    }
+
+    .bars-icon{
+        background-color: var(--white);
+        border-radius: 10px;
+        width: 1.5rem;
+        height: .2rem;
+        margin-block: .3rem;
+        transition: background-color .5s;
+    }
+
+    #nav-bar:checked ~ .bar-label > .bars-icon{
+        background-color: var(--txt-color);
+    }
+
+}
+
+/* Hero Section Styles */
+.hero{
+    background-image: url('../images/hero.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 25%;
+    position: relative;
+    z-index: -1;
+    height: 80vh;
+}
+
+/* Black Overlay */
+.hero::before {
+    content: '';
+    background-color: #0000009f;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: -2;
+}
+
+.hero-text {
+    color: var(--white-txt-color);
+    text-align: center;
+    max-width: 700px;
+    padding: 2%;
+}
+
+.hero-text h1 {
+    font-size: 2rem;
+    line-height: 3rem;
+}
+
+.hero-text small {
+    display: block;
+    font-size: .7rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    word-spacing: 10px;
+    text-transform: uppercase;
+}
+
+/* Desktop Styles */
+@media (min-width: 700px) {
+
+    .hero-text h1 {
+        font-size: 3rem;
+        line-height: 3.5rem;
+    }
+
+    .hero-text small {
+        font-size: 1rem;
+    }
+
+}
+
+/* Food Menu Styles */
+.food-menu {
+    padding: 3rem 0 4rem;
+    scroll-behavior: smooth;
+}
+
+.brush-stroke-heading {
+    color: var(--white-txt-color);
+    background-image: url('../images/brush-stroke-yellow.svg');
+    background-size: 270px;
+    background-repeat: no-repeat;
+    background-position: center;
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    font-weight: 700;
+    padding: 1rem;
+}
+
+.food-menu-list {
+    background-color: var(--menu-list-bg);
+    box-shadow: 0 0 15px var(--menu-list-shadow);
+    border-bottom: 1px solid var(--yellow);
+    border-radius: 6px;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: repeat( 11, minmax(200px, 1fr) );
+    gap: 1.7rem;
+    margin: 2rem 0 4rem;
+    padding: 1rem 1rem;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: inline mandatory;
+    scroll-padding-inline: 1rem;
+}
+
+.food-menu-list > * {
+    scroll-snap-align: start;
+}
+
+.food-menu-item {
+    box-shadow: 0 0 6px var(--menu-item-shadow);
+    border-radius: 6px;
+    position: relative;
+    z-index: -1;
+    cursor: pointer;
+}
+
+.food-menu-item::after {
+    content: '';
+    background-color: #00000091;
+    border-radius: 6px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+.menu-item-heading {
+    color: var(--white-txt-color);
+    position: absolute;
+    z-index: 2;
+    text-align: center;
+    font-size: 1rem;
+    font-family: 'Nunito', sans-serif;
+    letter-spacing: 1px;
+    padding: .5rem;
+}
+
+.food-menu-item > img {
+    border-radius: 6px;
+    /* display block to remove space at bottom of img */
+    display: block;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    width: 100%;
+}
+
+/* Food Menu Desktop Styles */
+@media (min-width: 700px) {
+
+    .food-menu {
+        padding: 5rem 0;
+    }
+
+}
+
+/* Menu Category & Dishes */
+
+.divider {
+    border-top: var(--divider-width) solid var(--divider);
+}
+
+.menu-category-con {
+    background-size: cover;
+    background-repeat: no-repeat;
+    box-shadow: 0 0 15px var(--menu-item-shadow);
+    border-radius: 0.7rem;
+    position: relative;
+    z-index: -2;
+    margin-bottom: 5rem;
+    padding: 2rem 1.8rem;
+}
+
+.cat1 {
+    background-image: url(../images/vege.jpeg);
+}
+
+.cat2 {
+    background-image: url(../images/tikka2.jpg);
+}
+
+.cat3 {
+    background-image: url(../images/biryani2.jpg);
+}
+
+.cat4 {
+    background-image: url(../images/curry1.jpeg);
+}
+
+.cat5 {
+    background-image: url(../images/curry2.jpg);
+}
+
+.cat6 {
+    background-image: url(../images/roti&curry.jpg);
+}
+
+.cat7 {
+    background-image: url(../images/curry3.jpeg);
+}
+
+.cat8 {
+    background-image: url(../images/spice2.jpg);
+}
+
+.cat9 {
+    background-image: url(../images/puri.jpeg);
+}
+
+.cat10 {
+    background-image: url(../images/multiDish1.jpg);
+}
+
+.cat11 {
+    background-image: url(../images/Kheer.jpg);
+    background-position: center;
+    margin-bottom: 0;
+}
+
+.menu-category-con::before {
+    content: '';
+    background-color: var(--menu-cat-con-bg);
+    border-radius: 0.7rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+.menu-cat-header {
+    color: var(--txt-color);
+    gap: 1.2rem;
+    padding: 1rem 0 2rem;
+}
+
+.menu-cat-header > h2 {
+    text-align: center;
+}
+
+.menu-cat-head-icon {
+    width: 3rem;
+}
+
+.menu-category {
+    flex-direction: column;
+}
+
+.menu-category-column {
+    flex-basis: 100%;
+}
+
+.dish-card {
+    display: grid;
+    grid-template-areas: "dishName dishPrice"
+                         "dishDescription .";
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.dish-name {
+    color: var(--txt-color);
+    grid-area: dishName;
+    padding: 0.5rem 0;
+}
+
+.dish-price {
+    color: var(--txt-color);
+    grid-area: dishPrice;
+}
+
+.dish-description {
+    color: var(--txt-color);
+    grid-area: dishDescription;
+}
+
+/* Menu Category & Dishes Desktop Styles */
+@media (min-width: 800px) {
+
+    .divider {
+        border-top: none;
+        border-left: 2px solid var(--yellow);
+        margin-left: 4rem;
+        padding-left: 4rem;
+    }
+
+    .menu-category {
+        flex-direction: row;
+    }
+
+}
+
+/* Download Button */
+.download-section {
+    margin-bottom: 6rem;
+}
+
+.download-btn {
+    color: var(--white);
+    background-image: linear-gradient(to right, #ff9a17, #facf42);
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.3rem;
+    padding: 0.8em 1em;
+}
+
+.download-btn:hover {
+    background-image: linear-gradient(to right, #facf42, #ff9a17);
+}
+
+/* Footer Styles */
+.footer{
+    background-image: url('../images/hero.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 1;
+    padding: 1rem 0;
+}
+
+/* Black Overlay */
+.footer::before {
+    content: '';
+    background-image: linear-gradient(to bottom, #000000e8 40%, #00000065 );
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+/* Contact Styles */
+.contact-h1 {
+    background-image: url('../images/brush-stroke-green.svg');
+    font-size: 1.8rem;
+    padding-block: 4rem;
+}
+
+.contact-info-con {
+    color: var(--white-txt-color);
+    display: grid;
+}
+
+.contact-info-con > div {
+    display: flex;
+}
+
+.address > h3,
+.opening-hours > h3,
+.whatsapp > h3 {
+    display: none;
+}
+
+.address > div,
+.opening-hours > div,
+.whatsapp > div {
+    padding: 1rem;
+}
+
+.address a,
+.whatsapp a {
+    color: var(--white-txt-color);
+}
+
+.address a:hover,
+.whatsapp a:hover {
+    color: #75ee8f;
+}
+
+.contact-info-img {
+    width: 2rem;
+}
+
+.copyright {
+    color: var(--white-txt-color);
+    text-align: center;
+    padding: 1rem;
+}
+
+/* location */
+.location,
+.location > iframe {
+    width: 100%;
+    height: 50vh;
+    padding: 2rem 0;
+}
+
+/* Footer Desktop Styles */
+@media (min-width: 800px) {
+
+    .contact-info-con {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    
+    .contact-info-con > div {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .contact-info-img {
+        width: 2.4rem;
+    }
+
+    .address > h3,
+    .opening-hours > h3,
+    .whatsapp > h3 {
+        display: block;
+        font-family: 'Nunito', sans-serif;
+        font-weight: 400;
+    }
+    
+}
